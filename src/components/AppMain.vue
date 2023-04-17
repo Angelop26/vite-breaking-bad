@@ -1,10 +1,13 @@
 <script>
 import AppCard from './AppCard.vue';
 import {store} from '../store';
+import AppLoader from './AppLoader.vue';
+
 export default{
     name:'AppMain',
     components:{
-        AppCard
+        AppCard,
+        AppLoader
     },
 
     data(){
@@ -17,7 +20,10 @@ export default{
 </script>
 
 <template>
-    <main class="p-4">
+    <div v-if="store.loading">
+        <AppLoader />
+    </div>
+    <main class="p-4" v-else>
         <div class="container mb-3">
             <select name="" id="" class="ps-2">
                 <option value="">Alien</option>

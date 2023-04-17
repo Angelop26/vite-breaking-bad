@@ -1,13 +1,15 @@
 <script>
 import AppHeader from './components/AppHeader.vue';
 import AppMain from './components/AppMain.vue';
+import AppLoader from './components/AppLoader.vue'
 import axios from "axios";
 import { store } from './store';
 
 export default{
     components:{
         AppHeader,
-        AppMain
+        AppMain,
+        AppLoader
     },
 
     data(){
@@ -17,17 +19,20 @@ export default{
     },
 
     mounted(){
+        store.loading = true
         axios.get(store.apiURL)
             .then((resp) =>{
                 this.store.cards= resp.data.data
+                store.loading = false
             })
     }
 }
 </script>
 
 <template>
-<AppHeader title="YU-GI-OH API"/>
-<AppMain />
+    <AppLoader />
+    <AppHeader title="YU-GI-OH API"/>
+    <AppMain />
 </template>
 
 <style lang="scss">
